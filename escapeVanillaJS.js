@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 navigateLabyrinth(directions)
                     .then(message => {
                         // 🪲 Bug: Incorrect method
-                        document.getElementById("room3Result").innerHTML = message;
+                        document.getElementById("room3Result").textContent = message;
                     });
             });
     });
@@ -40,8 +40,11 @@ function findMostRecentBook(books) {
 
 //function findIntersection(setA, setB) {
     // 🪲 Bug: Incorrect logic
-   // const intersection = new Set([...setA]);
+    //const intersection = new Set([...setA]);
    // return intersection;
+
+// Code above confusing me. Code below is correct.
+
    function findIntersection(jsConcepts, reactConcepts) {
     return new Set([...jsConcepts].filter(item => reactConcepts.has(item)));
 }
@@ -49,10 +52,11 @@ function findMostRecentBook(books) {
 
 async function navigateLabyrinth(directions) {
     for (let direction of directions) {
-        // 🪲 Bug: No delay
-        new Promise(resolve => setTimeout(resolve, 1000));
+        // 🪲 Added await
+       await new Promise(resolve => setTimeout(resolve, 1000));
         console.log(`Navigating: ${direction.step}`);
     }
     return "Congratulations! You've mastered the essentials of Vanilla JavaScript. Welcome to the world of React, where you'll build powerful and dynamic web applications. Let's dive in!";
 }
 
+//Checked to see if return messages is logged in console with dealy of 1000ms. 
