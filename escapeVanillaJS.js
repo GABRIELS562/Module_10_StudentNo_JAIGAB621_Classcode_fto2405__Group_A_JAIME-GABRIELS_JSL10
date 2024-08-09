@@ -10,6 +10,18 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
+    function findMostRecentBook(books) {
+        return books.reduce((mostRecent, book) => new Date(book.published) > new Date(mostRecent.published) ? book : mostRecent);
+    }
+    
+    //function findIntersection(setA, setB) {
+        // 🪲 Bug: Incorrect logic
+        //const intersection = new Set([...setA]);
+       // return intersection;
+    
+    // Code above confusing me. Code below is correct.
+    
+      
     document.getElementById("solveRoom2").addEventListener("click", () => {
         const jsConcepts = new Set(['closure', 'scope', 'hoisting', 'async']);
         // 🪲 Bug: What's mssing from JS concepts?
@@ -18,6 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const commonConcepts = findIntersection(jsConcepts, reactConcepts);
         document.getElementById("room2Result").textContent = `The code to unlock the door is: ${Array.from(commonConcepts).join(', ')}`;
     });
+
+    function findIntersection(jsConcepts, reactConcepts) {
+        return new Set([...jsConcepts].filter(item => reactConcepts.has(item)));
+    }
 
     // 🪲 Bug: Asynchronous function ?
     document.getElementById("solveRoom3").addEventListener("click", () => {
@@ -32,22 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 });
-
-function findMostRecentBook(books) {
-    // 🪲 Bug: Logic error
-    return books.reduce((mostRecent, book) => new Date(book.published) > new Date(mostRecent.published) ? book : mostRecent);
-}
-
-//function findIntersection(setA, setB) {
-    // 🪲 Bug: Incorrect logic
-    //const intersection = new Set([...setA]);
-   // return intersection;
-
-// Code above confusing me. Code below is correct.
-
-   function findIntersection(jsConcepts, reactConcepts) {
-    return new Set([...jsConcepts].filter(item => reactConcepts.has(item)));
-}
 
 
 async function navigateLabyrinth(directions) {
